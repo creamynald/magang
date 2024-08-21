@@ -1,0 +1,7 @@
+#sidebar-menu .sidebar-list i {
+    color: #ffffff; /* Warna putih untuk ikon */
+}
+
+#sidebar-menu .sidebar-list a:hover i {
+    color: #ffffff; /* Warna putih untuk ikon saat hover */
+}
