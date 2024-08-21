@@ -1,7 +1,7 @@
 <div id="sidebar-menu">
     <ul class="sidebar-links" id="simple-bar">
         <li class="back-btn">
-            <a href="index.html">
+            <a href="{{ route('dashboard') }}">
                 <img class="img-fluid" src="{{ asset('admin/assets') }}/images/logo/logo-icon.png" alt="Logo">
             </a>
             <div class="mobile-back text-end">
@@ -14,6 +14,16 @@
             <div>
                 <h6>General</h6>
             </div>
+        </li>
+        
+
+        <!-- Dashboard Menu -->
+        <li class="sidebar-list">
+            <i class="fa fa-thumb-tack"></i>
+            <a class="sidebar-link sidebar-title" href="{{ route('dashboard') }}">
+                <i class="fa fa-home"></i>
+                <span>Dashboard</span>
+            </a>
         </li>
 
         <!-- Magang Menu -->
@@ -29,15 +39,6 @@
                 <li><a href="#">Pembimbing</a></li>
                 <li><a href="#">Rincian Kegiatan</a></li>
             </ul>
-        </li>
-
-        <!-- Dashboard Menu -->
-        <li class="sidebar-list">
-            <i class="fa fa-thumb-tack"></i>
-            <a class="sidebar-link sidebar-title" href="#">
-                <i class="fa fa-home"></i>
-                <span>Dashboard</span>
-            </a>
         </li>
 
         <!-- Settings Title -->
@@ -68,8 +69,9 @@
                 <span>Applications</span>
             </a>
             <ul class="sidebar-submenu">
-                <li><a href="app-settings.html">App Settings</a></li>
-                <li><a href="app-management.html">App Management</a></li>
+                <li><a href="{{ route('instansi.index') }}">Instansi</a></li>
+                <li><a href="#">App Settings</a></li>
+                <li><a href="#">App Management</a></li>
             </ul>
         </li>
 
