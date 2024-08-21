@@ -37,7 +37,7 @@
                                                 <ul class="action">
                                                     <li class="edit">
                                                         <a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#exampleModal" data-original-title="test">
+                                                            data-bs-target="#viewModal" data-original-title="detail">
                                                             <i class="icon-eye"></i>
                                                         </a>
                                                     </li>
