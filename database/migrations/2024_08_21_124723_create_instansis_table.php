@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('kode_pos');
             $table->string('laman_web');
             $table->string('surel');
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }
