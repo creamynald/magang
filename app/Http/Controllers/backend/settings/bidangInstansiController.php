@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\backend\settings;
 
 use App\Http\Controllers\Controller;
+use App\Models\bidangInstansi;
 use Illuminate\Http\Request;
-use App\Models\Instansi;
 
-class instansiController extends Controller
+class bidangInstansiController extends Controller
 {
     public function index(Request $request)
     {
         $segments = $request->segments();
         $pageTitle = ucfirst(end($segments));
-        return view('template.admin.settings.instansi.index',[
+        return view('template.admin.settings.bidangInstansi.index',[
             'pageTitle' => $pageTitle,
-            'dataInstansi' => Instansi::orderBy('id', 'desc')->get()
+            'dataBidInstansi' => bidangInstansi::orderBy('id', 'desc')->get()
         ]);
     }
 }
