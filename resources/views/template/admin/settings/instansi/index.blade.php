@@ -36,8 +36,8 @@
                                             <td>
                                                 <ul class="action">
                                                     <li class="edit">
-                                                        <a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#viewModal" data-original-title="detail">
+                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#viewModal"
+                                                            data-original-title="detail">
                                                             <i class="icon-eye"></i>
                                                         </a>
                                                     </li>
@@ -59,7 +59,8 @@
             </div>
             <!-- Zero Configuration  Ends-->
         </div>
-        @include('template.admin.settings.instansi.modal')
+    </div>
+    @include('template.admin.settings.instansi.modal')
     </div>
 @endsection
 

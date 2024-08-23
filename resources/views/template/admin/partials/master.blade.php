@@ -120,6 +120,6 @@
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="{{ asset('admin') }}/assets/js/script.js"></script>
-    <script src="{{ asset('admin') }}/assets/js/theme-customizer/customizer.js"></script>
+    {{-- <script src="{{ asset('admin') }}/assets/js/theme-customizer/customizer.js"></script> --}}
   </body>
 </html>
