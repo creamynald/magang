@@ -16,3 +16,6 @@ Route::prefix('admin')->group(function () {
         Route::resource('instansi', instansiController::class);
     });
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
