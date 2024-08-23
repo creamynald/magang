@@ -17,8 +17,8 @@
                         </div>
                         <div class="col mb-2">
                             <label class="form-label" for="link">Laman Web</label>
-                            <input class="form-control" id="link" type="text" placeholder="{{ $row->laman_web }}"
-                                readonly>
+                            <input class="form-control" id="link" type="text"
+                                placeholder="{{ $row->laman_web }}" readonly>
                         </div>
                         <div class="col mb-2">
                             <label class="form-label" for="email">Laman Web</label>
@@ -30,3 +30,4 @@
             </div>
         </div>
     </div>
+</div>
