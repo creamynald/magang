@@ -12,9 +12,16 @@ class bidangInstansiController extends Controller
     {
         $segments = $request->segments();
         $pageTitle = ucfirst(end($segments));
-        return view('template.admin.settings.bidangInstansi.index',[
+        return view('template.admin.settings.bidangInstansi.index', [
             'pageTitle' => $pageTitle,
-            'dataBidInstansi' => bidangInstansi::orderBy('id', 'desc')->get()
+            'dataBidInstansi' => bidangInstansi::orderBy('instansi_id', 'desc')->get(),
         ]);
+    }
+
+    public function destroy($id)
+    {
+        $bidangInstansi = bidangInstansi::find($id);
+        $bidangInstansi->delete();
+        return to_route('bidang-instansi.index')->with('success', 'Data berhasil dihapus');
     }
 }

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\dashboardController;
-use App\Http\Controllers\backend\settings\{instansiController, bidangInstansi};
+use App\Http\Controllers\backend\settings\{instansiController, bidangInstansiController};
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,7 +14,7 @@ Route::prefix('admin')->group(function () {
     // for super admin
     Route::prefix('settings')->group(function () {
         Route::resource('instansi', instansiController::class);
-        Route::resource('bidang-instansi', bidangInstansi::class);
+        Route::resource('bidang-instansi', bidangInstansiController::class);
     });
 });
 Auth::routes();
