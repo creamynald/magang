@@ -11,6 +11,14 @@
                             do to use it with your own tables is to call the construction
                             function:<code>$().DataTable();</code>.</span><span>Searching, ordering and paging goodness will
                             be immediately added to the table, as shown in this example.</span>
+
+                        <div class="card-header-right">
+                            <div class="d-flex align-items-center">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#addModal"
+                                    class="btn btn-outline-primary mr-2"><i class="icon-plus"></i> Tambah Data</a>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="card-body">
                         <div class="table-responsive custom-scrollbar">
@@ -19,7 +27,6 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Instansi</th>
-                                        <th>Nama Bidang</th>
                                         <th>Penanggung Jawab</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
@@ -29,18 +36,17 @@
                                     @foreach ($dataBidInstansi as $index => $row)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
-                                            <td>{{ $row->instansi->nama }}</td>
-                                            <td>{{ $row->nama }}</td>
+                                            <td>{{ $row->instansi->nama }} <br>{{ $row->nama }}</td>
                                             <td>{{ $row->nama_penanggung_jawab }}
                                                 <br>
-                                                <span class="badge rounded-pill badge-primary">NIP. {{ $row->nip }}</span>
+                                                <span class="badge rounded-pill badge-primary">NIP.
+                                                    {{ $row->nip }}</span>
                                             </td>
                                             <td>
                                                 @if ($row->is_active == 1)
                                                     <span class="badge rounded-pill badge-success">
                                                         Aktif
                                                     </span>
-                                                    
                                                 @else
                                                     <span class="badge rounded-pill badge-danger">
                                                         Tidak Aktif
@@ -59,7 +65,8 @@
                                                         <a href="#"><i class="icon-pencil-alt"></i></a>
                                                     </li>
                                                     <li class="delete">
-                                                        <form action="{{ route('bidang-instansi.destroy', $row->id) }}" method="post">
+                                                        <form action="{{ route('bidang-instansi.destroy', $row->id) }}"
+                                                            method="post">
                                                             @csrf
                                                             @method('delete')
                                                             <button type="submit" class="btn btn-link p-0"><i
@@ -78,7 +85,7 @@
             </div>
             <!-- Zero Configuration  Ends-->
         </div>
-        {{-- @include('template.admin.settings.instansi.modal') --}}
+        @include('template.admin.settings.bidangInstansi.modal')
     </div>
 @endsection
 
