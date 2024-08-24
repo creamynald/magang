@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nama_penanggung_jawab');
             $table->string('nip');
             $table->string('telepon');
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }

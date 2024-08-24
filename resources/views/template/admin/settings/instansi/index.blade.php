@@ -31,7 +31,16 @@
                                             <td>{{ $row->nama }}</td>
                                             <td>{{ $row->alamat }}</td>
                                             <td>
-                                                <span class="badge rounded-pill badge-success">Aktif</span>
+                                                @if ($row->is_active == 1)
+                                                    <span class="badge rounded-pill badge-success">
+                                                        Aktif
+                                                    </span>
+                                                    
+                                                @else
+                                                    <span class="badge rounded-pill badge-danger">
+                                                        Tidak Aktif
+                                                    </span>
+                                                @endif
                                             </td>
                                             <td>
                                                 <ul class="action">

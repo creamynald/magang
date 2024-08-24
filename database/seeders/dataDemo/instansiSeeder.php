@@ -20,6 +20,15 @@ class instansiSeeder extends Seeder
                 'kode_pos' => '28712',
                 'laman_web' => 'diskomintoik.bengkaliskab.go.id',
                 'surel' => 'diskomintoik@bengkaliskab.go.id',
+                'is_active' => true,
+            ],
+            [
+                'nama' => 'Dinas Kesehatan',
+                'alamat' => 'Jl. Pertanian No. 6 Bengkalis',
+                'kode_pos' => '28712',
+                'laman_web' => 'dinkes.bengkaliskab.go.id',
+                'surel' => 'info@dinkes.bengkaliskab.go.id',
+                'is_active' => false,
             ],
         ]);
     }

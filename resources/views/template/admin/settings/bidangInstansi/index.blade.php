@@ -21,6 +21,7 @@
                                         <th>Instansi</th>
                                         <th>Nama Bidang</th>
                                         <th>Penanggung Jawab</th>
+                                        <th>Status</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -35,7 +36,16 @@
                                                 <span class="badge rounded-pill badge-primary">NIP. {{ $row->nip }}</span>
                                             </td>
                                             <td>
-                                                <span class="badge rounded-pill badge-success">Aktif</span>
+                                                @if ($row->is_active == 1)
+                                                    <span class="badge rounded-pill badge-success">
+                                                        Aktif
+                                                    </span>
+                                                    
+                                                @else
+                                                    <span class="badge rounded-pill badge-danger">
+                                                        Tidak Aktif
+                                                    </span>
+                                                @endif
                                             </td>
                                             <td>
                                                 <ul class="action">
