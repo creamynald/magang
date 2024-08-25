@@ -3,6 +3,14 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
+            <!-- Trigger alert -->
+            @if (session('success'))
+                <div class="col-sm-12">
+                    <div class="alert alert-success dark" role="alert">
+                        <p><i class="icon-check"></i>{{ session('success') }}</p>
+                    </div>
+                </div>
+            @endif
             <!-- Zero Configuration  Starts-->
             <div class="col-sm-12">
                 <div class="card">
@@ -55,12 +63,6 @@
                                             </td>
                                             <td>
                                                 <ul class="action">
-                                                    <li class="edit">
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#viewModal"
-                                                            data-original-title="detail">
-                                                            <i class="icon-eye"></i>
-                                                        </a>
-                                                    </li>
                                                     <li class="edit">
                                                         <a href="{{ route('bidang-instansi.edit', $row->id) }}"
                                                             data-original-title="edit">
