@@ -14,8 +14,8 @@
 
                         <div class="card-header-right">
                             <div class="d-flex align-items-center">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#addModal"
-                                    class="btn btn-outline-primary mr-2"><i class="icon-plus"></i> Tambah Data</a>
+                                <a href="{{ route('bidang-instansi.create') }}" class="btn btn-outline-primary mr-2"><i
+                                        class="icon-plus"></i> Tambah Data</a>
                             </div>
                         </div>
 
@@ -62,7 +62,10 @@
                                                         </a>
                                                     </li>
                                                     <li class="edit">
-                                                        <a href="#"><i class="icon-pencil-alt"></i></a>
+                                                        <a href="{{ route('bidang-instansi.edit', $row->id) }}"
+                                                            data-original-title="edit">
+                                                            <i class="icon-pencil-alt"></i>
+                                                        </a>
                                                     </li>
                                                     <li class="delete">
                                                         <form action="{{ route('bidang-instansi.destroy', $row->id) }}"
