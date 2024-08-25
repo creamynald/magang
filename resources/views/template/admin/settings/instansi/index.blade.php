@@ -14,11 +14,7 @@
             <!-- Zero Configuration  Starts-->
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-header pb-0 card-no-border">
-                        <h4>Zero Configuration</h4><span>DataTables has most features enabled by default, so all you need to
-                            do to use it with your own tables is to call the construction
-                            function:<code>$().DataTable();</code>.</span><span>Searching, ordering and paging goodness will
-                            be immediately added to the table, as shown in this example.</span>
+                    <div class="card-header pb-0 card-no-border mb-4">
                         <div class="card-header-right">
                             <div class="d-flex align-items-center">
                                 <a href="{{ route('instansi.create') }}" class="btn btn-outline-primary mr-2"><i
