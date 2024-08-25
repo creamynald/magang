@@ -90,7 +90,6 @@
             </div>
             <!-- Zero Configuration  Ends-->
         </div>
-        @include('template.admin.settings.bidangInstansi.modal')
     </div>
 @endsection
 
