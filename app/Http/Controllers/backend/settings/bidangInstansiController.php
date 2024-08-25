@@ -12,7 +12,7 @@ class bidangInstansiController extends Controller
     public function index(Request $request)
     {
         $segments = $request->segments();
-        $pageTitle = ucfirst(end($segments));
+        $pageTitle = ucfirst(str_replace('-', ' ', end($segments)));
         return view('template.admin.settings.bidangInstansi.index', [
             'pageTitle' => $pageTitle,
             'dataBidInstansi' => bidangInstansi::orderBy('instansi_id', 'desc')->get(),

@@ -11,17 +11,17 @@ class instansiController extends Controller
     public function index(Request $request)
     {
         $segments = $request->segments();
-        $pageTitle = ucfirst(end($segments));
-        return view('template.admin.settings.instansi.index',[
+        $pageTitle = ucfirst(str_replace('-', ' ', end($segments)));
+        return view('template.admin.settings.instansi.index', [
             'pageTitle' => $pageTitle,
-            'dataInstansi' => Instansi::orderBy('id', 'desc')->get()
+            'dataInstansi' => Instansi::orderBy('id', 'desc')->get(),
         ]);
     }
 
     public function create()
     {
         return view('template.admin.settings.instansi.create', [
-            'pageTitle' => 'Tambah Instansi'
+            'pageTitle' => 'Tambah Instansi',
         ]);
     }
 
@@ -46,7 +46,7 @@ class instansiController extends Controller
     {
         return view('template.admin.settings.instansi.edit', [
             'pageTitle' => 'Edit Instansi',
-            'instansi' => Instansi::find($id)
+            'instansi' => Instansi::find($id),
         ]);
     }
 

@@ -49,7 +49,7 @@
         </li>
 
         <!-- Users Settings Menu -->
-        <li class="sidebar-list">
+        {{-- <li class="sidebar-list">
             <i class="fa fa-thumb-tack"></i>
             <a class="sidebar-link sidebar-title" href="#">
                 <i class="fa fa-users"></i>
@@ -59,20 +59,20 @@
                 <li><a href="user-profile.html">Users Profile</a></li>
                 <li><a href="edit-profile.html">Users Edit</a></li>
             </ul>
-        </li>
+        </li> --}}
 
         <!-- Applications Settings Menu -->
         <li class="sidebar-list">
             <i class="fa fa-thumb-tack"></i>
             <a class="sidebar-link sidebar-title" href="#">
                 <i class="fa fa-cogs"></i>
-                <span>Applications</span>
+                <span>Aplikasi</span>
             </a>
             <ul class="sidebar-submenu">
                 <li><a href="{{ route('instansi.index') }}">Instansi</a></li>
                 <li><a href="{{ route('bidang-instansi.index') }}">Bid. Instansi</a></li>
-                <li><a href="#">App Settings</a></li>
-                <li><a href="#">App Management</a></li>
+                {{-- <li><a href="#">App Settings</a></li>
+                <li><a href="#">App Management</a></li> --}}
             </ul>
         </li>
 
