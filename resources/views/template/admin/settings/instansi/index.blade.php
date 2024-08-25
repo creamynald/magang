@@ -3,6 +3,14 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
+            <!-- Trigger alert -->
+            @if (session('success'))
+                <div class="col-sm-12">
+                    <div class="alert alert-success dark" role="alert">
+                        <p><i class="icon-check"></i>{{ session('success') }}</p>
+                    </div>
+                </div>
+            @endif
             <!-- Zero Configuration  Starts-->
             <div class="col-sm-12">
                 <div class="card">
@@ -11,6 +19,12 @@
                             do to use it with your own tables is to call the construction
                             function:<code>$().DataTable();</code>.</span><span>Searching, ordering and paging goodness will
                             be immediately added to the table, as shown in this example.</span>
+                        <div class="card-header-right">
+                            <div class="d-flex align-items-center">
+                                <a href="{{ route('instansi.create') }}" class="btn btn-outline-primary mr-2"><i
+                                        class="icon-plus"></i> Tambah Data</a>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive custom-scrollbar">
@@ -35,7 +49,6 @@
                                                     <span class="badge rounded-pill badge-success">
                                                         Aktif
                                                     </span>
-                                                    
                                                 @else
                                                     <span class="badge rounded-pill badge-danger">
                                                         Tidak Aktif
@@ -45,16 +58,19 @@
                                             <td>
                                                 <ul class="action">
                                                     <li class="edit">
-                                                        <a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#viewModal" data-original-title="detail">
-                                                            <i class="icon-eye"></i>
+                                                        <a href="{{ route('instansi.edit', $row->id) }}"
+                                                            data-original-title="edit">
+                                                            <i class="icon-pencil-alt"></i>
                                                         </a>
                                                     </li>
-                                                    <li class="edit">
-                                                        <a href="#"><i class="icon-pencil-alt"></i></a>
-                                                    </li>
                                                     <li class="delete">
-                                                        <a href="#"><i class="icon-trash"></i></a>
+                                                        <form action="{{ route('instansi.destroy', $row->id) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <button type="submit" class="btn btn-link p-0"><i
+                                                                    class="icon-trash"></i></button>
+                                                        </form>
                                                     </li>
                                                 </ul>
                                             </td>
@@ -68,7 +84,6 @@
             </div>
             <!-- Zero Configuration  Ends-->
         </div>
-        @include('template.admin.settings.instansi.modal')
     </div>
 @endsection
 
