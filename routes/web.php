@@ -26,7 +26,7 @@ Route::prefix('admin')->group(function () {
         Route::resource('instansi', instansiController::class);
         Route::resource('bidang-instansi', bidangInstansiController::class);
         Route::resource('kegiatan', kegiatanController::class);
-        Route::resource('data-kegiatan', dataKegiatanController::class);
+        Route::resource('data-kegiatan-magang', dataKegiatanController::class);
         
         Route::resource('users', userController::class);
     });
