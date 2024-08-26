@@ -18,4 +18,9 @@ class Instansi extends Model
         'laman_web',
         'surel',
     ];
+
+    public function bidangInstansi()
+    {
+        return $this->hasMany(bidangInstansi::class, 'instansi_id');
+    }
 }

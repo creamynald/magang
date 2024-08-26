@@ -69,6 +69,7 @@ class instansiController extends Controller
     public function destroy($id)
     {
         $instansi = Instansi::find($id);
+        $instansi->bidangInstansi()->delete();
         $instansi->delete();
         return redirect()->route('instansi.index')->with('success', 'Data berhasil dihapus');
     }
