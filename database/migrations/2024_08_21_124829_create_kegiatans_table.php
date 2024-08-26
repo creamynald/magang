@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('kegiatans', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->foreignId('instansi_id')->constrained('instansis');
+            $table->foreignId('instansi_id')->constrained('instansis')->onDelete('cascade');
+            $table->year('periode_akademik');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }
