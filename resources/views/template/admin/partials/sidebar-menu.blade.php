@@ -76,6 +76,17 @@
                 <li><a href="#">App Management</a></li> --}}
             </ul>
         </li>
+        <!-- Users Menu -->
+        <li class="sidebar-list">
+            <i class="fa fa-thumb-tack"></i>
+            <a class="sidebar-link sidebar-title" href="#">
+                <i class="fa fa-users"></i>
+                <span>Users</span>
+            </a>
+            <ul class="sidebar-submenu">
+                <li><a href="{{ route('users.index') }}">User</a></li>
+            </ul>
+        </li>
 
 
     </ul>

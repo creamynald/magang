@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Database\Seeders\dataDemo\{instansiSeeder, bidangInstasiSeeder, kegiatanSeeder};
+use Database\Seeders\dataDemo\{instansiSeeder, bidangInstasiSeeder, kegiatanSeeder, UsersSeeder};
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             instansiSeeder::class,
             bidangInstasiSeeder::class,
             kegiatanSeeder::class,
+            UsersSeeder::class,
         ]);
     }
 }

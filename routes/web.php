@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\dashboardController;
-use App\Http\Controllers\backend\settings\{instansiController, bidangInstansiController, kegiatanController};
+use App\Http\Controllers\backend\settings\{instansiController, bidangInstansiController, kegiatanController, userController};
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,6 +16,8 @@ Route::prefix('admin')->group(function () {
         Route::resource('instansi', instansiController::class);
         Route::resource('bidang-instansi', bidangInstansiController::class);
         Route::resource('kegiatan', kegiatanController::class);
+
+        Route::resource('users', userController::class);
     });
 });
 Auth::routes();
