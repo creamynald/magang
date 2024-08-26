@@ -71,6 +71,7 @@
             <ul class="sidebar-submenu">
                 <li><a href="{{ route('instansi.index') }}">Instansi</a></li>
                 <li><a href="{{ route('bidang-instansi.index') }}">Bid. Instansi</a></li>
+                <li><a href="{{ route('kegiatan.index') }}">Kegiatan</a></li>
                 {{-- <li><a href="#">App Settings</a></li>
                 <li><a href="#">App Management</a></li> --}}
             </ul>
