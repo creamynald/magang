@@ -7,13 +7,15 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <form class="form theme-form" method="POST" action="{{ route('data-kegiatan.store') }}" enctype="multipart/form-data">
+                        <form class="form theme-form" method="POST" action="{{ route('data-kegiatan.store') }}"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label>Nama</label>
-                                        <input class="form-control" type="text" value="{{ auth()->user()->name }}" disabled>
+                                        <input class="form-control" type="text" value="{{ auth()->user()->name }}"
+                                            disabled>
                                         <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                                     </div>
                                 </div>
@@ -33,13 +35,15 @@
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label>Tanggal Mulai</label>
-                                        <input class="datepicker-here form-control" type="text" data-language="en" name="tanggal_mulai">
+                                        <input class="datepicker-here form-control" type="text" data-language="en"
+                                            name="tanggal_mulai">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label>Tanggal Selesai</label>
-                                        <input class="datepicker-here form-control" type="text" data-language="en" name="tanggal_selesai">
+                                        <input class="datepicker-here form-control" type="text" data-language="en"
+                                            name="tanggal_selesai">
                                     </div>
                                 </div>
                             </div>
@@ -54,9 +58,8 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label>Surat Permohonan</label>
-                                        <!-- Input file untuk dok_pengajuan -->
-                                        <input type="file" class="form-control" name="dok_pengajuan">
+                                        <label class="form-label" for="dok_pengajuan">Surat Permohonan</label>
+                                        <input class="form-control" id="dok_pengajuan" type="file" name="dok_pengajuan">
                                     </div>
                                 </div>
                             </div>

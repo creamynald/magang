@@ -7,6 +7,7 @@ use App\Models\dataKegiatan;
 use App\Models\Instansi;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class dataKegiatanController extends Controller
 {
@@ -24,6 +25,7 @@ class dataKegiatanController extends Controller
             'pageTitle' => $pageTitle,
             'dataKegiatan' => dataKegiatan::with(['user', 'instansi'])
                 ->where('user_id', auth()->user()->id)
+                ->latest()
                 ->get(),
         ]);
     }
@@ -40,22 +42,36 @@ class dataKegiatanController extends Controller
     {
         $request->validate([
             'instansi_id' => 'required',
-            'dok_pengajuan' => 'required',
+            'dok_pengajuan' => 'required|file|mimes:pdf,doc,docx|max:2048',
+            'tanggal_mulai' => 'required|date_format:m/d/Y',
+            'tanggal_selesai' => 'required|date_format:m/d/Y|after_or_equal:tanggal_mulai',
         ]);
-        
-        // put dok_pengajuan to public folder
-        $dok_pengajuan = $request->file('dok_pengajuan')->store('public/dok_pengajuan');
 
-        $pengajuan_magang = new DataKegiatan();
-        $pengajuan_magang->user_id = auth()->user()->id;
-        $pengajuan_magang->instansi_id = $request->instansi_id;
-        $pengajuan_magang->tanggal_mulai = Carbon::createFromFormat('m/d/Y', $request->tanggal_mulai)->format('Y-m-d');
-        $pengajuan_magang->tanggal_selesai = Carbon::createFromFormat('m/d/Y', $request->tanggal_selesai)->format('Y-m-d');
-        $pengajuan_magang->keterangan = $request->keterangan;
-        $pengajuan_magang->dok_pengajuan = $dok_pengajuan;
-        $pengajuan_magang->status = 0;
+        $instansi = Instansi::findOrFail($request->instansi_id);
 
-        $pengajuan_magang->save();
+        $tahunSekarang = now()->format('Y');
+
+        $username = str_replace(' ', '-', auth()->user()->name);
+        $instansiName = str_replace(' ', '-', $instansi->nama);
+        $date = now()->format('Ymd');
+
+        $filename = $tahunSekarang . '-' . $username . '-to-' . $instansiName . '-' . $date . '.' . $request->dok_pengajuan->extension();
+
+        $filePath = null;
+        if ($request->hasFile('dok_pengajuan')) {
+            $file = $request->file('dok_pengajuan');
+            $filePath = $file->storeAs('dok_pengajuan', $filename, 'public');
+        }
+
+        DataKegiatan::create([
+            'user_id' => auth()->user()->id,
+            'instansi_id' => $request->instansi_id,
+            'tanggal_mulai' => Carbon::createFromFormat('m/d/Y', $request->tanggal_mulai)->format('Y-m-d'),
+            'tanggal_selesai' => Carbon::createFromFormat('m/d/Y', $request->tanggal_selesai)->format('Y-m-d'),
+            'keterangan' => $request->keterangan,
+            'dok_pengajuan' => $filePath,
+            'status' => 0,
+        ]);
 
         return redirect()->route('data-kegiatan.index')->with('success', 'Pengajuan magang berhasil disimpan');
     }

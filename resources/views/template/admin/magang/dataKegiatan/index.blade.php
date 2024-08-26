@@ -43,8 +43,9 @@
                                             <td>{{ $row->instansi?->nama }}</td>
                                             <td>{{ $row->tanggal_mulai }}</td>
                                             <td>{{ $row->tanggal_selesai }}</td>
-                                            <td class="action"> <a class="pdf" href="{{ $row->dok_pengajuan }}"
-                                                    target="_blank"><i class="icofont icofont-file-pdf"> </i></a></td>
+                                            <td class="action"> <a class="pdf" href="{{ asset($row->dok_pengajuan) }}"
+                                                    target="_blank"><i class="icofont icofont-file-pdf"> </i></a>
+                                            </td>
                                             <td>
                                                 @if ($row->status == '0')
                                                     <span class="badge rounded-pill badge-success">
