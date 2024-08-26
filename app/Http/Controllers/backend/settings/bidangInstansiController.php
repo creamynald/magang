@@ -15,7 +15,7 @@ class bidangInstansiController extends Controller
         $pageTitle = ucfirst(str_replace('-', ' ', end($segments)));
         return view('template.admin.settings.bidangInstansi.index', [
             'pageTitle' => $pageTitle,
-            'dataBidInstansi' => bidangInstansi::orderBy('instansi_id', 'desc')->get(),
+            'dataBidInstansi' => bidangInstansi::with('instansi')->orderBy('nama', 'asc')->get(),
         ]);
     }
 

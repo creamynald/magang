@@ -38,7 +38,7 @@
                                     @foreach ($dataBidInstansi as $index => $row)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
-                                            <td>{{ $row->instansi->nama }} <br>{{ $row->nama }}</td>
+                                            <td>{{ $row->instansi?->nama ?? 'deleted' }} <br>{{ $row->nama }}</td>
                                             <td>{{ $row->nama_penanggung_jawab }}
                                                 <br>
                                                 <span class="badge rounded-pill badge-primary">NIP.
