@@ -8,6 +8,7 @@ use App\Models\Instansi;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class dataKegiatanController extends Controller
 {
@@ -23,7 +24,7 @@ class dataKegiatanController extends Controller
 
         return view('template.admin.magang.dataKegiatan.index', [
             'pageTitle' => $pageTitle,
-            'dataKegiatan' => dataKegiatan::with(['user', 'instansi'])
+            'dataKegiatan' => DataKegiatan::with(['user', 'instansi'])
                 ->where('user_id', auth()->user()->id)
                 ->latest()
                 ->get(),
@@ -50,12 +51,11 @@ class dataKegiatanController extends Controller
         $instansi = Instansi::findOrFail($request->instansi_id);
 
         $tahunSekarang = now()->format('Y');
-
-        $username = str_replace(' ', '-', auth()->user()->name);
-        $instansiName = str_replace(' ', '-', $instansi->nama);
+        $username = Str::slug(auth()->user()->name); // Sanitize username
+        $instansiName = Str::slug($instansi->nama); // Sanitize instansi name
         $date = now()->format('Ymd');
 
-        $filename = $tahunSekarang . '-' . $username . '-to-' . $instansiName . '-' . $date . '.' . $request->dok_pengajuan->extension();
+        $filename = $tahunSekarang . '-' . $username . '-to-' . $instansiName . '-' . $date . '.' . $request->dok_pengajuan->getClientOriginalExtension();
 
         $filePath = null;
         if ($request->hasFile('dok_pengajuan')) {
@@ -81,7 +81,61 @@ class dataKegiatanController extends Controller
         return view('template.admin.magang.dataKegiatan.edit', [
             'pageTitle' => 'Edit Pengajuan Magang',
             'instansi' => Instansi::latest()->get(),
-            'dataKegiatan' => DataKegiatan::find($id),
+            'dataKegiatan' => DataKegiatan::findOrFail($id),
         ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Validation rules
+        $request->validate([
+            'instansi_id' => 'required',
+            'dok_pengajuan' => 'file|mimes:pdf,doc,docx|max:2048',
+            'tanggal_mulai' => 'required|date_format:m/d/Y',
+            'tanggal_selesai' => 'required|date_format:m/d/Y|after_or_equal:tanggal_mulai',
+        ]);
+
+        // Retrieve the existing DataKegiatan record
+        $dataKegiatan = DataKegiatan::findOrFail($id);
+
+        // Retrieve the related instansi
+        $instansi = Instansi::findOrFail($request->instansi_id);
+
+        // File handling: Only generate filename and store if a new file is uploaded
+        $filePath = $dataKegiatan->dok_pengajuan; // Default to the existing file path
+        if ($request->hasFile('dok_pengajuan')) {
+            $file = $request->file('dok_pengajuan');
+
+            $tahunSekarang = now()->format('Y');
+            $username = Str::slug(auth()->user()->name); // Sanitize username
+            $instansiName = Str::slug($instansi->nama); // Sanitize instansi name
+            $date = now()->format('Ymd');
+
+            $filename = $tahunSekarang . '-' . $username . '-to-' . $instansiName . '-' . $date . '.' . $file->getClientOriginalExtension();
+
+            // Store the file and update the file path
+            $filePath = $file->storeAs('dok_pengajuan', $filename, 'public');
+        }
+
+        // Update the DataKegiatan record
+        $dataKegiatan->update([
+            'instansi_id' => $request->instansi_id,
+            'tanggal_mulai' => Carbon::createFromFormat('m/d/Y', $request->tanggal_mulai)->format('Y-m-d'),
+            'tanggal_selesai' => Carbon::createFromFormat('m/d/Y', $request->tanggal_selesai)->format('Y-m-d'),
+            'keterangan' => $request->keterangan,
+            'dok_pengajuan' => $filePath,
+            'status' => 0,
+        ]);
+
+        // Redirect with success message
+        return redirect()->route('data-kegiatan.index')->with('success', 'Pengajuan magang berhasil diubah');
+    }
+
+    public function destroy($id)
+    {
+        $dataKegiatan = DataKegiatan::findOrFail($id);
+        $dataKegiatan->delete();
+
+        return redirect()->route('data-kegiatan.index')->with('success', 'Pengajuan magang berhasil dihapus');
     }
 }

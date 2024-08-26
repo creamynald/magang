@@ -7,31 +7,66 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <form class="form theme-form" method="POST" action="{{ route('users.update', $user->id) }}">
+                        <form class="form theme-form" method="POST" action="{{ route('data-kegiatan.update', $dataKegiatan->id) }}"
+                            enctype="multipart/form-data">
                             @csrf
-                            @method('PUT')
+                            @method('PUT') <!-- This method directive is essential for updating -->
                             <div class="row">
-                                <div class="col">
+                                <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label>Nama</label>
-                                        <input class="form-control" type="text" name="name"
-                                            placeholder="Nama User" value="{{ $user->name }}" required>
+                                        <input class="form-control" type="text" value="{{ auth()->user()->name }}"
+                                            disabled>
+                                        <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <label>Instansi</label>
+                                        <select class="form-select" name="instansi_id" required>
+                                            <option value="">Pilih Instansi</option>
+                                            @foreach ($instansi as $row)
+                                                <option value="{{ $row->id }}" 
+                                                    {{ $row->id == $dataKegiatan->instansi_id ? 'selected' : '' }}>
+                                                    {{ $row->nama }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm">
                                     <div class="mb-3">
-                                        <label>Surel</label>
-                                        <input class="form-control" type="email" name="email"
-                                            placeholder="Surel" value="{{ $user->email }}">
+                                        <label>Tanggal Mulai</label>
+                                        <input class="datepicker-here form-control" type="text" data-language="en"
+                                            name="tanggal_mulai" value="{{ \Carbon\Carbon::parse($dataKegiatan->tanggal_mulai)->format('m/d/Y') }}">
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm">
                                     <div class="mb-3">
-                                        <label>Password (Kosongkan jika tidak ingin mengubah)</label>
-                                        <input class="form-control" type="password" name="password"
-                                            placeholder="Password User">
+                                        <label>Tanggal Selesai</label>
+                                        <input class="datepicker-here form-control" type="text" data-language="en"
+                                            name="tanggal_selesai" value="{{ \Carbon\Carbon::parse($dataKegiatan->tanggal_selesai)->format('m/d/Y') }}">
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="dok_pengajuan">Surat Permohonan</label>
+                                        <input class="form-control" id="dok_pengajuan" type="file" name="dok_pengajuan">
+                                        @if ($dataKegiatan->dok_pengajuan)
+                                            <small class="form-text text-muted">
+                                                File saat ini: <a href="{{ asset('storage/' . $dataKegiatan->dok_pengajuan) }}" target="_blank">Lihat Dokumen</a>
+                                            </small>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label>Deskripsi</label>
+                                        <textarea class="form-control" name="keterangan" rows="3" placeholder="Masukkan ketertarikan/hobi (tidak wajib)">{{ $dataKegiatan->keterangan }}</textarea>
                                     </div>
                                 </div>
                             </div>

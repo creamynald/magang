@@ -32,18 +32,24 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm">
                                     <div class="mb-3">
                                         <label>Tanggal Mulai</label>
                                         <input class="datepicker-here form-control" type="text" data-language="en"
                                             name="tanggal_mulai">
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm">
                                     <div class="mb-3">
                                         <label>Tanggal Selesai</label>
                                         <input class="datepicker-here form-control" type="text" data-language="en"
                                             name="tanggal_selesai">
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="dok_pengajuan">Surat Permohonan</label>
+                                        <input class="form-control" id="dok_pengajuan" type="file" name="dok_pengajuan">
                                     </div>
                                 </div>
                             </div>
@@ -57,16 +63,8 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="dok_pengajuan">Surat Permohonan</label>
-                                        <input class="form-control" id="dok_pengajuan" type="file" name="dok_pengajuan">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
                                     <div class="text-end">
-                                        <button class="btn btn-primary" type="submit">Ajukan!</button>
+                                        <button class="btn btn-primary" type="submit">Ajukan</button>
                                         <a href="{{ url()->previous() }}" class="btn btn-danger">Batal</a>
                                     </div>
                                 </div>
