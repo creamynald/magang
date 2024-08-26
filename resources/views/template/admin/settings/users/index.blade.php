@@ -17,7 +17,7 @@
                     <div class="card-header pb-0 card-no-border mb-4">
                         <div class="card-header-right">
                             <div class="d-flex align-items-center">
-                                <a href="{{ route('kegiatan.create') }}" class="btn btn-outline-primary mr-2"><i
+                                <a href="{{ route('users.create') }}" class="btn btn-outline-primary mr-2"><i
                                         class="icon-plus"></i> Tambah Data</a>
                             </div>
                         </div>
@@ -58,13 +58,13 @@
                                             <td>
                                                 <ul class="action">
                                                     <li class="edit">
-                                                        <a href="{{ route('kegiatan.edit', $row->id) }}"
+                                                        <a href="{{ route('users.edit', $row->id) }}"
                                                             data-original-title="edit">
                                                             <i class="icon-pencil-alt"></i>
                                                         </a>
                                                     </li>
                                                     <li class="delete">
-                                                        <form action="{{ route('kegiatan.destroy', $row->id) }}"
+                                                        <form action="{{ route('users.destroy', $row->id) }}"
                                                             method="post">
                                                             @csrf
                                                             @method('delete')

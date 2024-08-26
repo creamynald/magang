@@ -7,61 +7,39 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <form class="form theme-form" method="POST" action="{{ route('kegiatan.update', $kegiatan->id) }}">
+                        <form class="form theme-form" method="POST" action="{{ route('users.update', $user->id) }}">
                             @csrf
                             @method('PUT')
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col">
                                     <div class="mb-3">
-                                        <label>Nama Kegiatan</label>
-                                        <input class="form-control" type="text" name="nama" placeholder="Nama Kegiatan"
-                                            value="{{ $kegiatan->nama }}" required>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="mb-3">
-                                        <label>Instansi</label>
-                                        <select class="form-select" name="instansi_id">
-                                            <option>Pilih Instansi</option>
-                                            @foreach ($daftarInstansi as $row)
-                                                <option value="{{ $row->id }}" {{ $kegiatan->instansi_id == $row->id ? 'selected' : '' }}>
-                                                    {{ $row->nama }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                        <label>Nama</label>
+                                        <input class="form-control" type="text" name="name"
+                                            placeholder="Nama User" value="{{ $user->name }}" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-2">
+                                <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <label>Periode</label>
-                                        <input class="form-control" type="number" name="periode_akademik"
-                                            placeholder="Tahun" value="{{ $kegiatan->periode_akademik }}">
+                                        <label>Surel</label>
+                                        <input class="form-control" type="email" name="email"
+                                            placeholder="Surel" value="{{ $user->email }}">
                                     </div>
                                 </div>
-                                <div class="col-sm-5">
+                                <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <label>Tanggal Mulai</label>
-                                        <input class="datepicker-here form-control" type="text" data-language="en"
-                                            name="tanggal_mulai" value="{{ \Carbon\Carbon::parse($kegiatan->tanggal_mulai)->format('m/d/Y') }}">
+                                        <label>Password (Kosongkan jika tidak ingin mengubah)</label>
+                                        <input class="form-control" type="password" name="password"
+                                            placeholder="Password User">
                                     </div>
                                 </div>
-                                <div class="col-sm-5">
-                                    <div class="mb-3">
-                                        <div class="mb-3">
-                                            <label>Tanggal Selesai</label>
-                                            <input class="datepicker-here form-control" type="text" data-language="en"
-                                                name="tanggal_selesai" value="{{ \Carbon\Carbon::parse($kegiatan->tanggal_selesai)->format('m/d/Y') }}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="text-end">
-                                            <button class="btn btn-primary" type="submit">Simpan Perubahan</button>
-                                            <a href="{{ url()->previous() }}" class="btn btn-danger">Batal</a>
-                                        </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="text-end">
+                                        <button class="btn btn-primary" type="submit">Simpan Perubahan</button>
+                                        <a href="{{ url()->previous() }}" class="btn btn-danger">Batal</a>
                                     </div>
                                 </div>
                             </div>
