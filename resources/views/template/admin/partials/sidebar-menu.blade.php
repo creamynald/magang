@@ -35,9 +35,7 @@
             </a>
             <ul class="sidebar-submenu">
                 <li><a href="#">Data Kegiatan</a></li>
-                <li><a href="#">Peserta</a></li>
-                <li><a href="#">Pembimbing</a></li>
-                <li><a href="#">Rincian Kegiatan</a></li>
+                <li><a href="{{ route('rincian-kegiatan.index') }}">Rincian Kegiatan</a></li>
             </ul>
         </li>
 
