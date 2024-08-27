@@ -42,7 +42,7 @@
                                             <td>{{ $row->name }}
                                             <td>{{ $row->email }}</td>
                                             <td class="text-center">
-                                                Belum Diatur
+                                                {{ $row->roles->pluck('name')->implode(', ') }}
                                             </td>
                                             <td>
                                                 @if ($row->is_active == 1)
