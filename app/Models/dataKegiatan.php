@@ -18,6 +18,7 @@ class dataKegiatan extends Model
         'tanggal_selesai',
         'keterangan',
         'dok_pengajuan',
+        'user_id',
         'status',
     ];
 

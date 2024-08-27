@@ -7,69 +7,65 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <form class="form theme-form" method="POST" action="{{ route('kegiatan.store') }}">
+                        <form class="form theme-form" method="POST" action="{{ route('data-kegiatan.store') }}"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div class="col-sm-4">
+                                <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <label>Nama Kegiatan</label>
-                                        <input class="form-control" type="text" name="nama"
-                                            placeholder="Nama Kegiatan" required>
+                                        <label>Nama</label>
+                                        <input class="form-control" type="text" value="{{ auth()->user()->name }}"
+                                            disabled>
+                                        <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label>Instansi</label>
-                                        <select class="form-select" name="instansi_id">
-                                            <option>Pilih Instansi</option>
-                                            @foreach ($daftarInstansi as $row)
+                                        <select class="form-select" name="instansi_id" required>
+                                            <option value="">Pilih Instansi</option>
+                                            @foreach ($instansi as $row)
                                                 <option value="{{ $row->id }}">{{ $row->nama }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="mb-3">
-                                        <label>Instansi</label>
-                                        <select class="form-select" name="instansi_id">
-                                            <option>Pilih Dosen Pembimbing</option>
-                                            @foreach ($daftarDospem as $row)
-                                                <option value="{{ $row->id }}">{{ $row->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-2">
-                                    <div class="mb-3">
-                                        <label>Periode</label>
-                                        <input class="form-control" type="text" name="periode_akademik"
-                                            placeholder="Tahun">
-                                    </div>
-                                </div>
-                                <div class="col-sm-5">
+                                <div class="col-sm">
                                     <div class="mb-3">
                                         <label>Tanggal Mulai</label>
                                         <input class="datepicker-here form-control" type="text" data-language="en"
                                             name="tanggal_mulai">
                                     </div>
                                 </div>
-                                <div class="col-sm-5">
+                                <div class="col-sm">
                                     <div class="mb-3">
-                                        <div class="mb-3">
-                                            <label>Tanggal Selesai</label>
-                                            <input class="datepicker-here form-control" type="text" data-language="en"
-                                                name="tanggal_selesai">
-                                        </div>
+                                        <label>Tanggal Selesai</label>
+                                        <input class="datepicker-here form-control" type="text" data-language="en"
+                                            name="tanggal_selesai">
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="text-end">
-                                            <button class="btn btn-primary" type="submit">Tambah</button>
-                                            <a href="{{ url()->previous() }}" class="btn btn-danger">Batal</a>
-                                        </div>
+                                <div class="col-sm">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="dok_pengajuan">Surat Permohonan</label>
+                                        <input class="form-control" id="dok_pengajuan" type="file" name="dok_pengajuan">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label>Deskripsi</label>
+                                        <textarea class="form-control" name="keterangan" rows="3" placeholder="Masukkan ketertarikan/hobi (tidak wajib)"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="text-end">
+                                        <button class="btn btn-primary" type="submit">Ajukan</button>
+                                        <a href="{{ url()->previous() }}" class="btn btn-danger">Batal</a>
                                     </div>
                                 </div>
                             </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend\settings;
 use App\Http\Controllers\Controller;
 use App\Models\Instansi;
 use App\Models\Kegiatan;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -27,6 +28,7 @@ class kegiatanController extends Controller
         return view('template.admin.settings.kegiatan.create', [
             'pageTitle' => $pageTitle,
             'daftarInstansi' => Instansi::orderBy('nama', 'asc')->get(),
+            'daftarDospem' => User::role('dosen pembimbing')->orderBy('name', 'asc')->get(),
         ]);
     }
 

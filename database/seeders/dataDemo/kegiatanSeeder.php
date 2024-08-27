@@ -20,6 +20,7 @@ class kegiatanSeeder extends Seeder
                 'periode_akademik' => '2024',
                 'tanggal_mulai' => '2023-08-01',
                 'tanggal_selesai' => '2023-08-31',
+                'user_id' => 1,
                 'is_active' => true,
             ],
 

@@ -14,7 +14,7 @@ class userController extends Controller
         $pageTitle = ucfirst(str_replace('-', ' ', end($segments)));
         return view('template.admin.settings.users.index', [
             'pageTitle' => $pageTitle,
-            'dataUsers' => User::with('roles')->latest()->get(),
+            'dataUsers' => User::role('user')->latest()->get(),
         ]);
     }
 

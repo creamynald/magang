@@ -2,6 +2,7 @@
 
 namespace Database\Seeders\spatie;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
@@ -49,6 +50,9 @@ class PermissionsDemoSeeder extends Seeder
         $role3 = Role::create(['name' => 'Super-Admin']);
         // gets all permissions via Gate::before rule; see AuthServiceProvider
 
+        $role_pembimbing = Role::create(['name' => 'dosen pembimbing']);
+        $role_pembimbing->givePermissionTo('view rincian kegiatan');
+
         // create demo users
         $user_siswa = \App\Models\User::factory()->create([
             'name' => 'Siswa',
@@ -60,6 +64,18 @@ class PermissionsDemoSeeder extends Seeder
         ]);
         $user_siswa->assignRole($role1);
         $user_mahasiswa->assignRole($role1);
+
+        $user_pembimbing1 = User::factory()->create([
+            'name' => 'Pembimbing 1',
+            'email' => 'pembimbing@example.com',
+        ]);
+        $user_pembimbing1->assignRole($role_pembimbing);
+
+        $user_pembimbing2 = User::factory()->create([
+            'name' => 'Pembimbing 2',
+            'email' => 'pembimbing2@example.com',
+        ]);
+        $user_pembimbing2->assignRole($role_pembimbing);
 
         $user = \App\Models\User::factory()->create([
             'name' => 'Admin',
