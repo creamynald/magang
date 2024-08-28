@@ -14,7 +14,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('dashboard', [dashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('magang')->group(function () {
