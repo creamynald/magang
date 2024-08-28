@@ -38,7 +38,7 @@
                                     @foreach ($dataInstansi as $index => $row)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
-                                            <td>{{ $row->nama }}</td>
+                                            <td>{{ $row->nama_instansi }}</td>
                                             <td>{{ $row->alamat }}</td>
                                             <td>
                                                 @if ($row->is_active == 1)

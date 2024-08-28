@@ -13,8 +13,19 @@
                                 <div class="col">
                                     <div class="mb-3">
                                         <label>Nama</label>
-                                        <input class="form-control" type="text" name="name"
-                                            placeholder="Nama User" required>
+                                        <input class="form-control" type="text" name="name" placeholder="Nama User"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label>Instansi</label>
+                                        <select class="form-select" name="role">
+                                            <option>Pilih Dosen Pembimbing</option>
+                                            @foreach ($roles as $row)
+                                                <option value="{{ $row->name }}">{{ $row->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -22,8 +33,7 @@
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label>Surel</label>
-                                        <input class="form-control" type="email" name="email"
-                                            placeholder="Surel">
+                                        <input class="form-control" type="email" name="email" placeholder="Surel">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">

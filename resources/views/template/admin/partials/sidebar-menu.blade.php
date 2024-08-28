@@ -15,7 +15,7 @@
                 <h6>General</h6>
             </div>
         </li>
-        
+
 
         <!-- Dashboard Menu -->
         <li class="sidebar-list">
@@ -68,8 +68,6 @@
             </a>
             <ul class="sidebar-submenu">
                 <li><a href="{{ route('instansi.index') }}">Instansi</a></li>
-                <li><a href="{{ route('bidang-instansi.index') }}">Bid. Instansi</a></li>
-                <li><a href="{{ route('kegiatan.index') }}">Kegiatan</a></li>
                 <li><a href="{{ route('data-kegiatan-magang.index') }}">Data Kegiatan</a></li>
                 {{-- <li><a href="#">App Settings</a></li>
                 <li><a href="#">App Management</a></li> --}}

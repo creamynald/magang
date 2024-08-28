@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('instansis', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('nama_instansi');
+            $table->string('nama_kegiatan');
+            $table->foreignId('user_id')->constrained('users');
             $table->string('alamat');
-            $table->string('kode_pos');
             $table->string('laman_web');
             $table->string('surel');
+            $table->string('telp');
             $table->boolean('is_active')->default(false);
             $table->timestamps();
         });

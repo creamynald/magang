@@ -50,7 +50,7 @@ class PermissionsDemoSeeder extends Seeder
         $role3 = Role::create(['name' => 'Super-Admin']);
         // gets all permissions via Gate::before rule; see AuthServiceProvider
 
-        $role_pembimbing = Role::create(['name' => 'dosen pembimbing']);
+        $role_pembimbing = Role::create(['name' => 'pembimbing']);
         $role_pembimbing->givePermissionTo('view rincian kegiatan');
 
         // create demo users

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend\settings;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class userController extends Controller
 {
@@ -14,7 +15,7 @@ class userController extends Controller
         $pageTitle = ucfirst(str_replace('-', ' ', end($segments)));
         return view('template.admin.settings.users.index', [
             'pageTitle' => $pageTitle,
-            'dataUsers' => User::role('user')->latest()->get(),
+            'dataUsers' => User::latest()->get(),
         ]);
     }
 
@@ -24,6 +25,7 @@ class userController extends Controller
         $pageTitle = ucfirst(str_replace('-', ' ', end($segments)));
         return view('template.admin.settings.users.create', [
             'pageTitle' => $pageTitle,
+            'roles' => Role::all(),
         ]);
     }
 
@@ -33,11 +35,13 @@ class userController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required',
+            'role' => 'required',
         ]);
 
         $user = new user();
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->assignRole($request->role);
         $user->password = bcrypt($request->password);
         $user->is_active = true;
 
@@ -59,6 +63,7 @@ class userController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email',
+            'role' => 'required',
         ]);
         
         
@@ -74,6 +79,7 @@ class userController extends Controller
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->syncRoles($request->role);
         $user->password = $password;
         $user->save();
 

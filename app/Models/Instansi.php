@@ -11,16 +11,10 @@ class Instansi extends Model
 
     protected $table = 'instansis';
 
-    protected $fillable = [
-        'nama',
-        'alamat',
-        'kode_pos',
-        'laman_web',
-        'surel',
-    ];
+    protected $fillable = ['nama_instansi', 'nama_kegiatan', 'user_id', 'alamat', 'laman_web', 'surel', 'telp'];
 
-    public function bidangInstansi()
+    public function user()
     {
-        return $this->hasMany(bidangInstansi::class, 'instansi_id');
+        return $this->belongsTo(User::class);
     }
 }

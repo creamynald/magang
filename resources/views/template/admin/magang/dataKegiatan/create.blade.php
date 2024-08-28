@@ -11,23 +11,31 @@
                             enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="mb-3">
+                                <div class="col-sm-4">
+                                    <div class="mb-4">
                                         <label>Nama</label>
                                         <input class="form-control" type="text" value="{{ auth()->user()->name }}"
                                             disabled>
                                         <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <div class="mb-3">
-                                        <label>Instansi</label>
-                                        <select class="form-select" name="instansi_id" required>
-                                            <option value="">Pilih Instansi</option>
-                                            @foreach ($instansi as $row)
+                                        <label>Kegiatan</label>
+                                        <select class="form-select" name="kegiatan_id" id="kegiatanSelect" required>
+                                            <option value="">Pilih Kegiatan</option>
+                                            @foreach ($kegiatan as $row)
                                                 <option value="{{ $row->id }}">{{ $row->nama }}</option>
                                             @endforeach
                                         </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="mb-3">
+                                        <label>Instansi</label>
+                                        <input class="form-control" type="text" id="instansiField" disabled>
+                                        <input type="hidden" name="instansi_id" id="instansiId">
                                     </div>
                                 </div>
                             </div>
@@ -36,14 +44,14 @@
                                     <div class="mb-3">
                                         <label>Tanggal Mulai</label>
                                         <input class="datepicker-here form-control" type="text" data-language="en"
-                                            name="tanggal_mulai">
+                                            name="tanggal_mulai" id="tanggalMulai" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm">
                                     <div class="mb-3">
                                         <label>Tanggal Selesai</label>
                                         <input class="datepicker-here form-control" type="text" data-language="en"
-                                            name="tanggal_selesai">
+                                            name="tanggal_selesai" id="tanggalSelesai" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm">
@@ -98,4 +106,28 @@
     <script src="{{ asset('admin/assets/js/typeahead/typeahead.custom.js') }}"></script>
     <script src="{{ asset('admin/assets/js/typeahead-search/handlebars.js') }}"></script>
     <script src="{{ asset('admin/assets/js/typeahead-search/typeahead-custom.js') }}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('kegiatanSelect').addEventListener('change', function() {
+                const kegiatanId = this.value;
+                if (kegiatanId) {
+                    fetch(`/get-kegiatan-details?kegiatan_id=${kegiatanId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            document.getElementById('instansiField').value = data.instansi_nama;
+                            document.getElementById('instansiId').value = data.instansi_id;
+                            document.getElementById('tanggalMulai').value = data.tanggal_mulai;
+                            document.getElementById('tanggalSelesai').value = data.tanggal_selesai;
+                        })
+                        .catch(error => console.error('Error fetching kegiatan details:', error));
+                } else {
+                    document.getElementById('instansiField').value = '';
+                    document.getElementById('instansiId').value = '';
+                    document.getElementById('tanggalMulai').value = '';
+                    document.getElementById('tanggalSelesai').value = '';
+                }
+            });
+        });
+    </script>
 @endpush

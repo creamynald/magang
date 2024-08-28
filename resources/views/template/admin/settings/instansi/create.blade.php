@@ -7,14 +7,41 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <form class="form theme-form" method="POST" action="{{ route('instansi.store') }}">
                             @csrf
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
                                         <label>Nama Instansi</label>
-                                        <input class="form-control" type="text" name="nama"
+                                        <input class="form-control" type="text" name="nama_instansi"
                                             placeholder="Nama Instansi" required>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label>Kegiatan</label>
+                                        <input class="form-control" type="text" name="nama_kegiatan" value="PKL/Magang"
+                                            placeholder="Nama Kegiatan">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label>Pembimbing</label>
+                                        <select class="form-select" name="user_id">
+                                            <option value="">Pilih Kegiatan</option>
+                                            @foreach ($pembimbing as $row)
+                                                <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -27,22 +54,22 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="mb-3">
-                                        <label>Kode POS</label>
-                                        <input class="form-control" type="number" name="kode_pos" placeholder="Kode POS">
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
+                                <div class="col">
                                     <div class="mb-3">
                                         <label>Laman Web</label>
                                         <input class="form-control" type="text" name="laman_web" placeholder="Laman Web">
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col">
                                     <div class="mb-3">
                                         <label>Surel</label>
                                         <input class="form-control" type="email" name="surel" placeholder="Surel">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label>Telp</label>
+                                        <input class="form-control" type="number" name="telp" placeholder="No. Telp">
                                     </div>
                                 </div>
                             </div>

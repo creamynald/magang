@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend\magang;
 use App\Http\Controllers\Controller;
 use App\Models\dataKegiatan;
 use App\Models\Instansi;
+use App\Models\Kegiatan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -24,7 +25,7 @@ class dataKegiatanController extends Controller
 
         return view('template.admin.magang.dataKegiatan.index', [
             'pageTitle' => $pageTitle,
-            'dataKegiatan' => DataKegiatan::with(['user', 'instansi'])
+            'dataKegiatan' => dataKegiatan::with(['user', 'instansi'])
                 ->where('user_id', auth()->user()->id)
                 ->latest()
                 ->get(),
@@ -35,7 +36,23 @@ class dataKegiatanController extends Controller
     {
         return view('template.admin.magang.dataKegiatan.create', [
             'pageTitle' => 'Pengajuan Magang',
+            'kegiatan' => Kegiatan::latest()->get(),
             'instansi' => Instansi::latest()->get(),
+        ]);
+    }
+
+    public function getKegiatanDetails(Request $request)
+    {
+        // Ambil detail kegiatan berdasarkan ID
+        $kegiatan = Kegiatan::findOrFail($request->kegiatan_id);
+        $instansi = Instansi::findOrFail($kegiatan->instansi_id);
+
+        // Kembalikan response JSON yang berisi detail kegiatan
+        return response()->json([
+            'instansi_id' => $instansi->id,
+            'instansi_nama' => $instansi->nama,
+            'tanggal_mulai' => $kegiatan->tanggal_mulai->format('m/d/Y'),
+            'tanggal_selesai' => $kegiatan->tanggal_selesai->format('m/d/Y'),
         ]);
     }
 
@@ -50,19 +67,16 @@ class dataKegiatanController extends Controller
 
         $instansi = Instansi::findOrFail($request->instansi_id);
 
+        // Generate filename and store dokumen pengajuan
         $tahunSekarang = now()->format('Y');
-        $username = Str::slug(auth()->user()->name); // Sanitize username
-        $instansiName = Str::slug($instansi->nama); // Sanitize instansi name
+        $username = Str::slug(auth()->user()->name);
+        $instansiName = Str::slug($instansi->nama);
         $date = now()->format('Ymd');
-
         $filename = $tahunSekarang . '-' . $username . '-to-' . $instansiName . '-' . $date . '.' . $request->dok_pengajuan->getClientOriginalExtension();
 
-        $filePath = null;
-        if ($request->hasFile('dok_pengajuan')) {
-            $file = $request->file('dok_pengajuan');
-            $filePath = $file->storeAs('dok_pengajuan', $filename, 'public');
-        }
+        $filePath = $request->file('dok_pengajuan')->storeAs('dok_pengajuan', $filename, 'public');
 
+        // Store data kegiatan
         DataKegiatan::create([
             'user_id' => auth()->user()->id,
             'instansi_id' => $request->instansi_id,
